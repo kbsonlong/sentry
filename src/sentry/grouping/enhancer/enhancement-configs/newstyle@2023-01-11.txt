@@ -400,3 +400,43 @@ family:native function:*.cold.1 category=indirection
 [ category:runtime ]    | category:system  category=internals
 [ category:runtime ]    | category:runtime category=internals
 [ category:dtor ]       | category:dtor    category=internals
+
+# SDK specific rules
+
+## general
+stack.abs_path:**/vendor/**        -app
+
+## python
+stack.abs_path:**/site-packages/** -app
+stack.abs_path:**/dist-packages/** -app
+
+## js
+stack.abs_path:**/node_modules/** -app
+
+## java
+stack.module:jdk.* -app
+stack.module:sun.* -app
+stack.module:com.sun.* -app
+stack.module:java.* -app
+stack.module:scala.* -app
+stack.module:akka.* -app
+stack.module:javax.* -app
+stack.module:org.apache.* -app
+stack.module:org.springframework.* -app
+stack.module:org.glassfish.* -app
+stack.module:org.jboss.* -app
+stack.module:feign.* -app
+stack.module:io.opentelemetry.* -app
+
+## kotlin
+stack.module:kotlin.* -app
+stack.module:kotlinx.* -app
+stack.module:io.ktor.* -app
+stack.module:io.netty.* -app
+
+# Telemetry - we don't care about other telemetry providers, just adds noise
+# TODO(neel) datadog / java w. alex
+# TODO(neel) can look at language specific telemetry lib stacktraces
+module:newrelic -app -group
+stack.abs_path:**/*newrelic*/** -app -group
+stack.abs_path:**/*LogRocket*/** -app -group
