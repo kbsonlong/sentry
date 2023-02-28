@@ -39,3 +39,7 @@ types-pytz
 types-pyyaml
 types-redis
 types-requests
+
+# oss
+qiniu==7.1.0
+oss2==2.16.0
